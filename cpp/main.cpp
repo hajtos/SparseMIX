@@ -11,7 +11,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     if (argc < 4) {
-        cout << "Usage: ./main <filename> <no. of clusters> <T parameter> [<seed>]" << endl;
+        cout << "Usage: ./algo <filename> <no. of clusters> <T parameter> [<seed>]" << endl;
         return 1;
     }
 
