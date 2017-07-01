@@ -6,15 +6,13 @@ from math import log
 def nlogn(n):
     return n*log(n) if n!=0 else 0
 
-def runAlgorithm(samples, cluster_number, dimensions, start_time=None, t=0.5, seed=0, alfa=1.0, eps=0.03):
+def runAlgorithm(samples, cluster_number, dimensions, t=0.5, seed=0, alfa=1.0, eps=0.03):
     """
     performs the SparseMIX algorithm
 
-    samples - a vector of points to be clustered, each point being a vector of positions of 1s
+    samples - a list of points to be clustered, each point being a set of non-zero positions(integers)
     cluster_number - the number of clusters to partition data into
     dimensions - the number of dimensions in the data
-    point_clusters - output parameter, an array that will contain the cluster numbers assigned to each point,
-        needs to be allocated before function call
     t - the threshold of the method after which a position is added to the representative
     seed - the seed for the randomization
     alfa - the percentage of the cost function attributed to the inner cluster cost. The rest of the cost

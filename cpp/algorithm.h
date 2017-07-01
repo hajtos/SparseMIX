@@ -6,7 +6,7 @@
 /*
     performs the SparseMIX algorithm
 
-    samples - a vector of points to be clustered, each point being a vector of positions of 1s
+    samples - a vector of points to be clustered, each point being a vector of positions of 1s(integers)
     cluster_number - the number of clusters to partition data into
     dimensions - the number of dimensions in the data
     point_clusters - output parameter, an array that will contain the cluster numbers assigned to each point,
