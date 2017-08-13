@@ -130,8 +130,8 @@ class Cluster(object):
                     self.cost_parts[pos] = nlogn(self.dim_counts[pos]-1)
         #special case: checking if removing the point would
         #scause a position to be added to the representative
-        border_val = int(self.point_count*self.t-0.0000001)
-        if border_val >= (self.point_count-1)*self.t:
+        border_val = int(self.point_count*self.t)
+        if border_val > (self.point_count-1)*self.t:
             for i in self.dim_buckets.get(border_val, set()):
                 if i not in point:
                     dis_sum += self.point_count-2*self.dim_counts[i]-1
