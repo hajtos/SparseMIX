@@ -1,12 +1,14 @@
-import Cluster
-import time
+from typing import List, Set, Tuple
+
+from python import Cluster
 import random
 from math import log
 
-def nlogn(n):
+def nlogn(n: float) -> float:
     return n*log(n) if n!=0 else 0
 
-def runAlgorithm(samples, cluster_number, dimensions, t=0.5, seed=0, alfa=1.0, eps=0.03):
+def runAlgorithm(samples: List[Set[int]], cluster_number: int, dimensions: int, t: float=0.5, seed: int=0,
+                 alfa: float=1.0, eps: float=0.03) -> Tuple[List[Cluster.Cluster], List[int], float]:
     """
     performs the SparseMIX algorithm
 
