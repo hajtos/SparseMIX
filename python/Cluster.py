@@ -1,34 +1,36 @@
 from math import log
+from typing import Set, List, Dict
 
-def nlogn(n):
+
+def nlogn(n: float) -> float:
     return n*log(n) if n!=0 else 0
 
-def add_count(count, diction, pos):
+def add_count(count: int, diction: Dict[int, Set[int]], pos: int) -> None:
     if count in diction:
         diction[count].add(pos)
     else:
         diction[count] = set([pos])
 
 class Cluster(object):
-    def __init__(self, dim, i, t):
-        self.points = []                                #list of points in the cluster
+    def __init__(self, dim: int, i: int, t: float) -> None:
+        self.points: List[Set[int]] = []                                #list of points in the cluster
         self.cost = 0.0                                 #the cost of the cluster
         self.dim_counts = [0 for _ in range(dim)]       #the number of 1s in each column
         self.point_count = 0                            #the total number of points
         self.cost_parts = [0.0 for _ in range(dim)]     #the saved parts of the cost that pertain to a certain column
-        self.representative = set()                     #the point that represents the cluster
+        self.representative: Set[int] = set()                     #the point that represents the cluster
         self.rep_sum = 0                                #the number of 1s in the representative
         self.dis_sum = 0                                #the sum of the differences between the representative and the cluster points
         self.dim = dim                                  #the dimension of the space
         self.number = i
-        self.dim_buckets = dict()
+        self.dim_buckets: Dict[int, Set[int]] = dict()
         self.t = t
 
-    def __str__(self):                                  #string presentation for debugging purposes
+    def __str__(self) -> str:                                  #string presentation for debugging purposes
         return str(self.number) + ":" + str(self.point_count) + " " + str(self.dim_counts) + \
             " " + str(self.representative) + " " + str(self.dis_sum) + "\n" + str(self.points) + "\n"
 
-    def addPoint(self, point):                          #adds a point
+    def addPoint(self, point: Set[int]) -> None:                          #adds a point
         self.getCostWith(point, update=True)
         self.points.append(point)
         for pos in point:
@@ -38,7 +40,7 @@ class Cluster(object):
             add_count(self.dim_counts[pos], self.dim_buckets, pos)
         self.point_count += 1
 
-    def removePoint(self, point):                       #removes a point
+    def removePoint(self, point: Set[int]) -> None:                       #removes a point
         self.getCostWithout(point, update=True)
         self.points.remove(point)
         for pos in point:
@@ -47,7 +49,7 @@ class Cluster(object):
             add_count(self.dim_counts[pos], self.dim_buckets, pos)
         self.point_count -= 1
 
-    def getCostWith(self, point, update=False):
+    def getCostWith(self, point: Set[int], update=False) -> float:
         """
         Returns the cost that would occur if the point was added
         if update=True, it updates the internal values with the modifications
@@ -98,7 +100,7 @@ class Cluster(object):
             self.dis_sum = dis_sum
         return cost
 
-    def getCostWithout(self, point, update=False):
+    def getCostWithout(self, point: Set[int], update=False) -> float:
         """
         Returns the cost that would occur if the point was removed
         if update=True, it updates the internal values with the modifications
@@ -155,23 +157,23 @@ class Cluster(object):
         """
         goods = []
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(self.point_count == len(self.points))
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(sum(len(point) for point in self.points) == sum(val for val in self.dim_counts))
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(len(self.representative) == self.rep_sum)
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(all(i in self.representative for i, count in enumerate(self.dim_counts) if count >= self.t*self.point_count))
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(all(i not in self.representative for i, count in enumerate(self.dim_counts) if count < self.t*self.point_count))
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(self.dis_sum == sum((self.point_count - count) if i in self.representative else count for i, count in enumerate(self.dim_counts)))
         if not all(goods):
-            print self, sum((self.point_count - count) if i in self.representative else count for i, count in enumerate(self.dim_counts))
-            blad
+            print(self, sum((self.point_count - count) if i in self.representative else count for i, count in enumerate(self.dim_counts)))
+            raise AssertionError()

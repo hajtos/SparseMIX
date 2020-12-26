@@ -1,5 +1,5 @@
 # SparseMIX
-This repository holds the code of the method SpaseMIX presented in (link to add after publication).\
+This repository holds the code of the method SparseMIX presented [here](https://link.springer.com/article/10.1007/s10618-019-00635-1).\
 There are two separate implementations, one in c++ and one in python. If used as standalone programs, both take a file and output the cluster assignments.\
 
 # c++
