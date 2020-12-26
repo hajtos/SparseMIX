@@ -155,23 +155,23 @@ class Cluster(object):
         """
         goods = []
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(self.point_count == len(self.points))
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(sum(len(point) for point in self.points) == sum(val for val in self.dim_counts))
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(len(self.representative) == self.rep_sum)
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(all(i in self.representative for i, count in enumerate(self.dim_counts) if count >= self.t*self.point_count))
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(all(i not in self.representative for i, count in enumerate(self.dim_counts) if count < self.t*self.point_count))
         if not all(goods):
-            blad
+            raise AssertionError()
         goods.append(self.dis_sum == sum((self.point_count - count) if i in self.representative else count for i, count in enumerate(self.dim_counts)))
         if not all(goods):
-            print self, sum((self.point_count - count) if i in self.representative else count for i, count in enumerate(self.dim_counts))
-            blad
+            print(self, sum((self.point_count - count) if i in self.representative else count for i, count in enumerate(self.dim_counts)))
+            raise AssertionError()
